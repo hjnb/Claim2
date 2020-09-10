@@ -6,7 +6,28 @@ Claim2
 </name>
 </assembly>
 <members>
-<member name="P:Claim2.My.Resources.Resources.ResourceManager">
+<member name="M:Claim2.TopForm.TopForm_Load(System.Object,System.EventArgs)">
+	<summary>
+ loadイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.TopForm.btnClaim2_Click(System.Object,System.EventArgs)">
+	<summary>
+ 請求先ﾏｽﾀボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.TopForm.topPicture_Click(System.Object,System.EventArgs)">
+	<summary>
+ トップ画像クリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="P:Claim2.My.Resources.Resources.ResourceManager">
 	<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
