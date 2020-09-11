@@ -94,6 +94,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Util.vb" />
+    <Compile Include="検索.Designer.vb">
+      <DependentUpon>検索.vb</DependentUpon>
+    </Compile>
+    <Compile Include="検索.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="請求先ﾏｽﾀ.Designer.vb">
       <DependentUpon>請求先ﾏｽﾀ.vb</DependentUpon>
     </Compile>
@@ -111,6 +118,9 @@
     <EmbeddedResource Include="TopForm.resx">
       <DependentUpon>TopForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="検索.resx">
+      <DependentUpon>検索.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="請求先ﾏｽﾀ.resx">
       <DependentUpon>請求先ﾏｽﾀ.vb</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +135,18 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

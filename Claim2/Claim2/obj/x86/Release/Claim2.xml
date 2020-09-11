@@ -6,7 +6,100 @@ Claim2
 </name>
 </assembly>
 <members>
-<member name="M:Claim2.TopForm.TopForm_Load(System.Object,System.EventArgs)">
+<member name="M:Claim2.検索.#ctor(System.Windows.Forms.DataGridView)">
+	<summary>
+ コンストラクタ
+ </summary>
+	<param name="dgv">データグリッドビュー</param>
+	<remarks></remarks>
+</member><member name="M:Claim2.検索.検索_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+	<summary>
+ keyDownイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.検索.検索_Load(System.Object,System.EventArgs)">
+	<summary>
+ loadイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.検索.btnCancel_Click(System.Object,System.EventArgs)">
+	<summary>
+ キャンセルボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.検索.btnSeach_Click(System.Object,System.EventArgs)">
+	<summary>
+ 検索ボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.Util.EnableDoubleBuffering(System.Windows.Forms.Control)">
+	<summary>
+ コントロールのDoubleBufferedプロパティをTrueにする
+ </summary>
+	<param name="control">対象のコントロール</param>
+</member><member name="M:Claim2.Util.checkDBNullValue(System.Object)">
+	<summary>
+ dgvのセルの値がNullかチェック、Nullの場合空文字を返す
+ </summary>
+	<param name="dgvCellValue"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Claim2.Util.convADStrToWarekiStr(System.String)">
+	<summary>
+ 西暦(yyyy/MM/dd)を和暦に変換
+ </summary>
+	<param name="adStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Claim2.Util.convWarekiStrToADStr(System.String)">
+	<summary>
+ 和暦を西暦に変換
+ </summary>
+	<param name="warekiStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Claim2.Util.getKanji(System.String)">
+	<summary>
+ 和暦の漢字を取得
+ </summary>
+	<param name="warekiStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Claim2.Util.getIniString(System.String,System.String,System.String)">
+	<summary>
+ iniファイルから読み込み
+ </summary>
+	<param name="lpSection">セクション名</param>
+	<param name="lpKeyName">読み込むkey名</param>
+	<param name="lpFileName">iniファイルパス</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Claim2.Util.putIniString(System.String,System.String,System.String,System.String)">
+	<summary>
+ iniファイルへ書き込み
+ </summary>
+	<param name="lpSection">セクション名</param>
+	<param name="lpKeyName">書き込む対象のkey名</param>
+	<param name="lpValue">書き込む値</param>
+	<param name="lpFileName">iniファイルパス</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Claim2.Util.calcAge(System.String,System.String)">
+	<summary>
+ 現在年齢算出
+ </summary>
+	<param name="birthYmd"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Claim2.TopForm.TopForm_Load(System.Object,System.EventArgs)">
 	<summary>
  loadイベント
  </summary>
@@ -23,6 +116,101 @@ Claim2
 </member><member name="M:Claim2.TopForm.topPicture_Click(System.Object,System.EventArgs)">
 	<summary>
  トップ画像クリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="T:Claim2.請求先ﾏｽﾀ.dgvRowHeaderCell">
+	<summary>
+ 行ヘッダーのカレントセルを表す三角マークを非表示に設定する為のクラス。
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.請求先ﾏｽﾀ_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+	<summary>
+ keyDownイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.請求先ﾏｽﾀ_Load(System.Object,System.EventArgs)">
+	<summary>
+ loadイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.initDgvNamM">
+	<summary>
+ データグリッドビュー初期設定
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.displayDgvNamM">
+	<summary>
+ マスタデータ表示
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.clearInput">
+	<summary>
+ 入力内容クリア
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.displayInfo(System.Windows.Forms.DataGridViewRow)">
+	<summary>
+ 選択行データ表示
+ </summary>
+	<param name="selectedRow"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.dgvMaster_CellPainting(System.Object,System.Windows.Forms.DataGridViewCellPaintingEventArgs)">
+	<summary>
+ CellPaintingイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.btnRegist_Click(System.Object,System.EventArgs)">
+	<summary>
+ 登録ボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.btnDelete_Click(System.Object,System.EventArgs)">
+	<summary>
+ 削除ボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.btnPrint_Click(System.Object,System.EventArgs)">
+	<summary>
+ 印刷ボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.btnHuto_Click(System.Object,System.EventArgs)">
+	<summary>
+ 封筒ボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.initialSearch(System.String)">
+	<summary>
+ 対象の頭文字までスクロール
+ </summary>
+	<param name="initialChar">頭文字</param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.btnSearchKana_Click(System.Object,System.EventArgs)">
+	<summary>
+ ｱ～ﾜボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.btnSearch_Click(System.Object,System.EventArgs)">
+	<summary>
+ 検索ボタンクリックイベント
  </summary>
 	<param name="sender"></param>
 	<param name="e"></param>

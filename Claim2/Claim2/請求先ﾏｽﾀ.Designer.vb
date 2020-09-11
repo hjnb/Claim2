@@ -60,10 +60,21 @@ Partial Class 請求先ﾏｽﾀ
         Me.rbtn3 = New System.Windows.Forms.RadioButton()
         Me.rbtn4 = New System.Windows.Forms.RadioButton()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dgvNamM = New System.Windows.Forms.DataGridView()
+        Me.btnSearchA = New System.Windows.Forms.Button()
+        Me.btnSearchKA = New System.Windows.Forms.Button()
+        Me.btnSearchTA = New System.Windows.Forms.Button()
+        Me.btnSearchSA = New System.Windows.Forms.Button()
+        Me.btnSearchYA = New System.Windows.Forms.Button()
+        Me.btnSearchMA = New System.Windows.Forms.Button()
+        Me.btnSearchHA = New System.Windows.Forms.Button()
+        Me.btnSearchNA = New System.Windows.Forms.Button()
+        Me.btnSearchWA = New System.Windows.Forms.Button()
+        Me.btnSearchRA = New System.Windows.Forms.Button()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvNamM, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -119,6 +130,7 @@ Partial Class 請求先ﾏｽﾀ
         'NamBox
         '
         Me.NamBox.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.NamBox.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.NamBox.Location = New System.Drawing.Point(131, 55)
         Me.NamBox.Name = "NamBox"
         Me.NamBox.Size = New System.Drawing.Size(134, 21)
@@ -127,6 +139,7 @@ Partial Class 請求先ﾏｽﾀ
         'KanaBox
         '
         Me.KanaBox.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.KanaBox.ImeMode = System.Windows.Forms.ImeMode.KatakanaHalf
         Me.KanaBox.Location = New System.Drawing.Point(131, 87)
         Me.KanaBox.Name = "KanaBox"
         Me.KanaBox.Size = New System.Drawing.Size(94, 21)
@@ -135,6 +148,7 @@ Partial Class 請求先ﾏｽﾀ
         'Jyu1Box
         '
         Me.Jyu1Box.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Jyu1Box.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.Jyu1Box.Location = New System.Drawing.Point(131, 151)
         Me.Jyu1Box.Name = "Jyu1Box"
         Me.Jyu1Box.Size = New System.Drawing.Size(237, 21)
@@ -143,6 +157,7 @@ Partial Class 請求先ﾏｽﾀ
         'PostBox
         '
         Me.PostBox.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.PostBox.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.PostBox.Location = New System.Drawing.Point(131, 119)
         Me.PostBox.Name = "PostBox"
         Me.PostBox.Size = New System.Drawing.Size(94, 21)
@@ -151,6 +166,7 @@ Partial Class 請求先ﾏｽﾀ
         'Jyu2Box
         '
         Me.Jyu2Box.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Jyu2Box.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.Jyu2Box.Location = New System.Drawing.Point(131, 183)
         Me.Jyu2Box.Name = "Jyu2Box"
         Me.Jyu2Box.Size = New System.Drawing.Size(237, 21)
@@ -159,6 +175,7 @@ Partial Class 請求先ﾏｽﾀ
         'STel1Box
         '
         Me.STel1Box.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.STel1Box.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.STel1Box.Location = New System.Drawing.Point(491, 183)
         Me.STel1Box.Name = "STel1Box"
         Me.STel1Box.Size = New System.Drawing.Size(100, 21)
@@ -167,6 +184,7 @@ Partial Class 請求先ﾏｽﾀ
         'SNamBox
         '
         Me.SNamBox.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.SNamBox.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.SNamBox.Location = New System.Drawing.Point(491, 151)
         Me.SNamBox.Name = "SNamBox"
         Me.SNamBox.Size = New System.Drawing.Size(137, 21)
@@ -175,6 +193,7 @@ Partial Class 請求先ﾏｽﾀ
         'SJyu2Box
         '
         Me.SJyu2Box.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.SJyu2Box.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.SJyu2Box.Location = New System.Drawing.Point(491, 119)
         Me.SJyu2Box.Name = "SJyu2Box"
         Me.SJyu2Box.Size = New System.Drawing.Size(237, 21)
@@ -183,6 +202,7 @@ Partial Class 請求先ﾏｽﾀ
         'SJyu1Box
         '
         Me.SJyu1Box.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.SJyu1Box.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.SJyu1Box.Location = New System.Drawing.Point(491, 87)
         Me.SJyu1Box.Name = "SJyu1Box"
         Me.SJyu1Box.Size = New System.Drawing.Size(237, 21)
@@ -191,6 +211,7 @@ Partial Class 請求先ﾏｽﾀ
         'SPostBox
         '
         Me.SPostBox.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.SPostBox.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.SPostBox.Location = New System.Drawing.Point(491, 55)
         Me.SPostBox.Name = "SPostBox"
         Me.SPostBox.Size = New System.Drawing.Size(94, 21)
@@ -249,6 +270,7 @@ Partial Class 請求先ﾏｽﾀ
         'STel2Box
         '
         Me.STel2Box.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.STel2Box.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.STel2Box.Location = New System.Drawing.Point(655, 183)
         Me.STel2Box.Name = "STel2Box"
         Me.STel2Box.Size = New System.Drawing.Size(100, 21)
@@ -267,6 +289,7 @@ Partial Class 請求先ﾏｽﾀ
         'SFaxBox
         '
         Me.SFaxBox.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.SFaxBox.ImeMode = System.Windows.Forms.ImeMode.Disable
         Me.SFaxBox.Location = New System.Drawing.Point(815, 183)
         Me.SFaxBox.Name = "SFaxBox"
         Me.SFaxBox.Size = New System.Drawing.Size(100, 21)
@@ -295,6 +318,7 @@ Partial Class 請求先ﾏｽﾀ
         'STextBox
         '
         Me.STextBox.Font = New System.Drawing.Font("MS UI Gothic", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.STextBox.ImeMode = System.Windows.Forms.ImeMode.Hiragana
         Me.STextBox.Location = New System.Drawing.Point(491, 216)
         Me.STextBox.Name = "STextBox"
         Me.STextBox.Size = New System.Drawing.Size(342, 21)
@@ -306,7 +330,7 @@ Partial Class 請求先ﾏｽﾀ
         Me.chkTai.Location = New System.Drawing.Point(131, 222)
         Me.chkTai.Name = "chkTai"
         Me.chkTai.Size = New System.Drawing.Size(48, 16)
-        Me.chkTai.TabIndex = 26
+        Me.chkTai.TabIndex = 27
         Me.chkTai.Text = "退院"
         Me.chkTai.UseVisualStyleBackColor = True
         '
@@ -314,8 +338,8 @@ Partial Class 請求先ﾏｽﾀ
         '
         Me.btnRegist.Location = New System.Drawing.Point(328, 275)
         Me.btnRegist.Name = "btnRegist"
-        Me.btnRegist.Size = New System.Drawing.Size(71, 29)
-        Me.btnRegist.TabIndex = 27
+        Me.btnRegist.Size = New System.Drawing.Size(71, 34)
+        Me.btnRegist.TabIndex = 26
         Me.btnRegist.Text = "登録"
         Me.btnRegist.UseVisualStyleBackColor = True
         '
@@ -323,7 +347,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         Me.btnDelete.Location = New System.Drawing.Point(398, 275)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(71, 29)
+        Me.btnDelete.Size = New System.Drawing.Size(71, 34)
         Me.btnDelete.TabIndex = 28
         Me.btnDelete.Text = "削除"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -332,16 +356,16 @@ Partial Class 請求先ﾏｽﾀ
         '
         Me.btnPrint.Location = New System.Drawing.Point(468, 275)
         Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(71, 29)
+        Me.btnPrint.Size = New System.Drawing.Size(71, 34)
         Me.btnPrint.TabIndex = 29
         Me.btnPrint.Text = "印刷"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
         'btnHuto
         '
-        Me.btnHuto.Location = New System.Drawing.Point(616, 275)
+        Me.btnHuto.Location = New System.Drawing.Point(641, 275)
         Me.btnHuto.Name = "btnHuto"
-        Me.btnHuto.Size = New System.Drawing.Size(71, 29)
+        Me.btnHuto.Size = New System.Drawing.Size(71, 34)
         Me.btnHuto.TabIndex = 30
         Me.btnHuto.Text = "封筒"
         Me.btnHuto.UseVisualStyleBackColor = True
@@ -350,7 +374,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         Me.Panel1.Controls.Add(Me.rbtnPrint)
         Me.Panel1.Controls.Add(Me.rbtnPreview)
-        Me.Panel1.Location = New System.Drawing.Point(702, 275)
+        Me.Panel1.Location = New System.Drawing.Point(727, 277)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(151, 29)
         Me.Panel1.TabIndex = 33
@@ -381,7 +405,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         Me.Panel2.Controls.Add(Me.rbtn3)
         Me.Panel2.Controls.Add(Me.rbtn4)
-        Me.Panel2.Location = New System.Drawing.Point(601, 310)
+        Me.Panel2.Location = New System.Drawing.Point(627, 310)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(160, 29)
         Me.Panel2.TabIndex = 34
@@ -412,27 +436,137 @@ Partial Class 請求先ﾏｽﾀ
         '
         Me.Label14.AutoSize = True
         Me.Label14.ForeColor = System.Drawing.Color.Blue
-        Me.Label14.Location = New System.Drawing.Point(765, 318)
+        Me.Label14.Location = New System.Drawing.Point(797, 319)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(168, 12)
         Me.Label14.TabIndex = 35
         Me.Label14.Text = "※プリンターのプロパティを封筒に※"
         '
-        'DataGridView1
+        'dgvNamM
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(42, 351)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 21
-        Me.DataGridView1.Size = New System.Drawing.Size(886, 364)
-        Me.DataGridView1.TabIndex = 36
+        Me.dgvNamM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvNamM.Location = New System.Drawing.Point(42, 351)
+        Me.dgvNamM.Name = "dgvNamM"
+        Me.dgvNamM.RowTemplate.Height = 21
+        Me.dgvNamM.Size = New System.Drawing.Size(929, 422)
+        Me.dgvNamM.TabIndex = 36
+        '
+        'btnSearchA
+        '
+        Me.btnSearchA.Location = New System.Drawing.Point(16, 351)
+        Me.btnSearchA.Name = "btnSearchA"
+        Me.btnSearchA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchA.TabIndex = 37
+        Me.btnSearchA.Text = "ｱ"
+        Me.btnSearchA.UseVisualStyleBackColor = True
+        '
+        'btnSearchKA
+        '
+        Me.btnSearchKA.Location = New System.Drawing.Point(16, 377)
+        Me.btnSearchKA.Name = "btnSearchKA"
+        Me.btnSearchKA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchKA.TabIndex = 38
+        Me.btnSearchKA.Text = "ｶ"
+        Me.btnSearchKA.UseVisualStyleBackColor = True
+        '
+        'btnSearchTA
+        '
+        Me.btnSearchTA.Location = New System.Drawing.Point(16, 429)
+        Me.btnSearchTA.Name = "btnSearchTA"
+        Me.btnSearchTA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchTA.TabIndex = 40
+        Me.btnSearchTA.Text = "ﾀ"
+        Me.btnSearchTA.UseVisualStyleBackColor = True
+        '
+        'btnSearchSA
+        '
+        Me.btnSearchSA.Location = New System.Drawing.Point(16, 403)
+        Me.btnSearchSA.Name = "btnSearchSA"
+        Me.btnSearchSA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchSA.TabIndex = 39
+        Me.btnSearchSA.Text = "ｻ"
+        Me.btnSearchSA.UseVisualStyleBackColor = True
+        '
+        'btnSearchYA
+        '
+        Me.btnSearchYA.Location = New System.Drawing.Point(16, 533)
+        Me.btnSearchYA.Name = "btnSearchYA"
+        Me.btnSearchYA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchYA.TabIndex = 44
+        Me.btnSearchYA.Text = "ﾔ"
+        Me.btnSearchYA.UseVisualStyleBackColor = True
+        '
+        'btnSearchMA
+        '
+        Me.btnSearchMA.Location = New System.Drawing.Point(16, 507)
+        Me.btnSearchMA.Name = "btnSearchMA"
+        Me.btnSearchMA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchMA.TabIndex = 43
+        Me.btnSearchMA.Text = "ﾏ"
+        Me.btnSearchMA.UseVisualStyleBackColor = True
+        '
+        'btnSearchHA
+        '
+        Me.btnSearchHA.Location = New System.Drawing.Point(16, 481)
+        Me.btnSearchHA.Name = "btnSearchHA"
+        Me.btnSearchHA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchHA.TabIndex = 42
+        Me.btnSearchHA.Text = "ﾊ"
+        Me.btnSearchHA.UseVisualStyleBackColor = True
+        '
+        'btnSearchNA
+        '
+        Me.btnSearchNA.Location = New System.Drawing.Point(16, 455)
+        Me.btnSearchNA.Name = "btnSearchNA"
+        Me.btnSearchNA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchNA.TabIndex = 41
+        Me.btnSearchNA.Text = "ﾅ"
+        Me.btnSearchNA.UseVisualStyleBackColor = True
+        '
+        'btnSearchWA
+        '
+        Me.btnSearchWA.Location = New System.Drawing.Point(16, 586)
+        Me.btnSearchWA.Name = "btnSearchWA"
+        Me.btnSearchWA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchWA.TabIndex = 46
+        Me.btnSearchWA.Text = "ﾜ"
+        Me.btnSearchWA.UseVisualStyleBackColor = True
+        '
+        'btnSearchRA
+        '
+        Me.btnSearchRA.Location = New System.Drawing.Point(16, 560)
+        Me.btnSearchRA.Name = "btnSearchRA"
+        Me.btnSearchRA.Size = New System.Drawing.Size(20, 23)
+        Me.btnSearchRA.TabIndex = 45
+        Me.btnSearchRA.Text = "ﾗ"
+        Me.btnSearchRA.UseVisualStyleBackColor = True
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(42, 275)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(71, 34)
+        Me.btnSearch.TabIndex = 47
+        Me.btnSearch.Text = "検索"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         '請求先ﾏｽﾀ
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(969, 750)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.ClientSize = New System.Drawing.Size(994, 819)
+        Me.Controls.Add(Me.btnSearch)
+        Me.Controls.Add(Me.btnSearchWA)
+        Me.Controls.Add(Me.btnSearchRA)
+        Me.Controls.Add(Me.btnSearchYA)
+        Me.Controls.Add(Me.btnSearchMA)
+        Me.Controls.Add(Me.btnSearchHA)
+        Me.Controls.Add(Me.btnSearchNA)
+        Me.Controls.Add(Me.btnSearchTA)
+        Me.Controls.Add(Me.btnSearchSA)
+        Me.Controls.Add(Me.btnSearchKA)
+        Me.Controls.Add(Me.btnSearchA)
+        Me.Controls.Add(Me.dgvNamM)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -473,7 +607,7 @@ Partial Class 請求先ﾏｽﾀ
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvNamM, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -516,5 +650,16 @@ Partial Class 請求先ﾏｽﾀ
     Friend WithEvents rbtn3 As System.Windows.Forms.RadioButton
     Friend WithEvents rbtn4 As System.Windows.Forms.RadioButton
     Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents dgvNamM As System.Windows.Forms.DataGridView
+    Friend WithEvents btnSearchA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchKA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchTA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchSA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchYA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchMA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchHA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchNA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchWA As System.Windows.Forms.Button
+    Friend WithEvents btnSearchRA As System.Windows.Forms.Button
+    Friend WithEvents btnSearch As System.Windows.Forms.Button
 End Class
