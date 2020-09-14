@@ -1,4 +1,6 @@
 ﻿Imports System.Data.OleDb
+Imports Microsoft.Office.Interop
+Imports System.Runtime.InteropServices
 
 Public Class 請求先ﾏｽﾀ
 
@@ -54,6 +56,44 @@ Public Class 請求先ﾏｽﾀ
 
         initDgvNamM()
         displayDgvNamM()
+        initPrintState()
+    End Sub
+
+    ''' <summary>
+    ''' 印刷ラジオボタン初期値設定
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub initPrintState()
+        Dim state As String = Util.getIniString("System", "Printer", topForm.iniFilePath)
+        If state = "Y" Then
+            rbtnPrint.Checked = True
+        Else
+            rbtnPreview.Checked = True
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' ﾌﾟﾚﾋﾞｭｰラジオボタン値変更イベント
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub rbtnPreview_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbtnPreview.CheckedChanged
+        If rbtnPreview.Checked = True Then
+            Util.putIniString("System", "Printer", "N", topForm.iniFilePath)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 印刷ラジオボタン値変更イベント
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub rbtnPrint_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbtnPrint.CheckedChanged
+        If rbtnPrint.Checked = True Then
+            Util.putIniString("System", "Printer", "Y", topForm.iniFilePath)
+        End If
     End Sub
 
     ''' <summary>
@@ -83,7 +123,7 @@ Public Class 請求先ﾏｽﾀ
             .RowTemplate.Height = 19
             .RowTemplate.HeaderCell = New dgvRowHeaderCell() '行ヘッダの三角マークを非表示に
             .BackgroundColor = Color.FromKnownColor(KnownColor.Control)
-            .ShowCellToolTips = False
+            .ShowCellToolTips = True
             .EnableHeadersVisualStyles = False
             .Font = New Font("ＭＳ Ｐゴシック", 9)
             .ReadOnly = False
@@ -113,6 +153,9 @@ Public Class 請求先ﾏｽﾀ
 
         '列追加
         dt.Columns.Add("Huto", GetType(Boolean)) '封筒
+        For Each row As DataGridViewRow In dgvNamM.Rows
+            row.Cells("Huto").Value = False
+        Next
 
         '幅設定等
         With dgvNamM
@@ -477,7 +520,98 @@ Public Class 請求先ﾏｽﾀ
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
+        '件数
+        Dim rowsCount As Integer = dgvNamM.Rows.Count
 
+        '現在日付
+        Dim nowYmd As String = DateTime.Now.ToString("yyyy/MM/dd")
+
+        '貼り付けデータ作成
+        Dim dataList As New List(Of String(,))
+        Dim dataArray(41, 11) As String
+        Dim arrayRowIndex As Integer = 0
+        For i As Integer = 0 To rowsCount - 1
+            If arrayRowIndex = 42 Then
+                dataList.Add(dataArray.Clone())
+                Array.Clear(dataArray, 0, dataArray.Length)
+                arrayRowIndex = 0
+            End If
+
+            'No.
+            dataArray(arrayRowIndex, 0) = i + 1
+            '退
+            Dim tai As String = Util.checkDBNullValue(dgvNamM("Tai", i).Value)
+            dataArray(arrayRowIndex, 1) = If(tai = "1", "退", "")
+            '患者名
+            dataArray(arrayRowIndex, 2) = Util.checkDBNullValue(dgvNamM("Nam", i).Value)
+            'ｶﾅ
+            dataArray(arrayRowIndex, 3) = Util.checkDBNullValue(dgvNamM("Kana", i).Value)
+            '空白1
+            dataArray(arrayRowIndex, 4) = ""
+            '空白2
+            dataArray(arrayRowIndex, 5) = ""
+            '〒
+            dataArray(arrayRowIndex, 6) = Util.checkDBNullValue(dgvNamM("SPost", i).Value)
+            '住所1
+            dataArray(arrayRowIndex, 7) = Util.checkDBNullValue(dgvNamM("SJyu1", i).Value)
+            '住所2
+            dataArray(arrayRowIndex, 8) = Util.checkDBNullValue(dgvNamM("SJyu2", i).Value)
+            '請求先名
+            dataArray(arrayRowIndex, 9) = Util.checkDBNullValue(dgvNamM("SNam", i).Value)
+            '電話1
+            dataArray(arrayRowIndex, 10) = Util.checkDBNullValue(dgvNamM("STel1", i).Value)
+            '電話2
+            dataArray(arrayRowIndex, 11) = Util.checkDBNullValue(dgvNamM("STel2", i).Value)
+
+            arrayRowIndex += 1
+        Next
+        dataList.Add(dataArray.Clone())
+
+        'エクセル
+        Dim objExcel As Excel.Application = CreateObject("Excel.Application")
+        Dim objWorkBooks As Excel.Workbooks = objExcel.Workbooks
+        Dim objWorkBook As Excel.Workbook = objWorkBooks.Open(TopForm.excelFilePath)
+        Dim oSheet As Excel.Worksheet = objWorkBook.Worksheets("請求先改")
+        objExcel.Calculation = Excel.XlCalculation.xlCalculationManual
+        objExcel.ScreenUpdating = False
+
+        '日付
+        oSheet.Range("I2").Value = nowYmd & "　作成"
+
+        '必要枚数コピペ
+        For i As Integer = 0 To dataList.Count - 2
+            Dim xlPasteRange As Excel.Range = oSheet.Range("A" & (48 + (47 * i))) 'ペースト先
+            oSheet.Rows("1:47").copy(xlPasteRange)
+            oSheet.HPageBreaks.Add(oSheet.Range("A" & (48 + (47 * i)))) '改ページ
+        Next
+
+        'データ貼り付け
+        For i As Integer = 0 To dataList.Count - 1
+            oSheet.Range("M" & (2 + 47 * i)).Value = (i + 1) & " 頁"
+            oSheet.Range("B" & (5 + 47 * i), "M" & (46 + 47 * i)).Value = dataList(i)
+        Next
+
+        objExcel.Calculation = Excel.XlCalculation.xlCalculationAutomatic
+        objExcel.ScreenUpdating = True
+
+        '変更保存確認ダイアログ非表示
+        objExcel.DisplayAlerts = False
+
+        '印刷
+        If rbtnPrint.Checked = True Then
+            oSheet.PrintOut()
+        ElseIf rbtnPreview.Checked = True Then
+            objExcel.Visible = True
+            oSheet.PrintPreview(1)
+        End If
+
+        ' EXCEL解放
+        objExcel.Quit()
+        Marshal.ReleaseComObject(objWorkBook)
+        Marshal.ReleaseComObject(objExcel)
+        oSheet = Nothing
+        objWorkBook = Nothing
+        objExcel = Nothing
     End Sub
 
     ''' <summary>
@@ -487,7 +621,167 @@ Public Class 請求先ﾏｽﾀ
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnHuto_Click(sender As System.Object, e As System.EventArgs) Handles btnHuto.Click
+        '印刷データ作成
+        Dim dataList As New List(Of String())
+        For Each row As DataGridViewRow In dgvNamM.Rows
+            Dim checked As Boolean = row.Cells("Huto").Value
+            If checked Then
+                '郵便番号
+                Dim post As String = Util.checkDBNullValue(row.Cells("SPost").Value)
+                '住所1
+                Dim jyu1 As String = Util.checkDBNullValue(row.Cells("SJyu1").Value)
+                '住所2
+                Dim jyu2 As String = Util.checkDBNullValue(row.Cells("SJyu2").Value)
+                '名前
+                Dim nam As String = Util.checkDBNullValue(row.Cells("SNam").Value) & "　様"
+                '患者名
+                Dim sText As String = Util.checkDBNullValue(row.Cells("Nam").Value) & "　様分"
 
+                dataList.Add({post, jyu1, jyu2, nam, sText})
+            End If
+        Next
+
+        If rbtnNaga3.Checked Then
+            '長形3号印刷
+            printNaga3(dataList)
+        ElseIf rbtnNaga4.Checked Then
+            '長形4号印刷
+            printNaga4(dataList)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 長形3号印刷
+    ''' </summary>
+    ''' <param name="dataList">印刷者リスト</param>
+    ''' <remarks></remarks>
+    Private Sub printNaga3(dataList As List(Of String()))
+        'エクセル
+        Dim objExcel As Excel.Application = CreateObject("Excel.Application")
+        Dim objWorkBooks As Excel.Workbooks = objExcel.Workbooks
+        Dim objWorkBook As Excel.Workbook = objWorkBooks.Open(TopForm.excelFilePath)
+        Dim oSheet As Excel.Worksheet = objWorkBook.Worksheets("長形３号改")
+        objExcel.Calculation = Excel.XlCalculation.xlCalculationManual
+        objExcel.ScreenUpdating = False
+
+        '削除
+        oSheet.Range("J2").Value = ""
+        oSheet.Range("E8").Value = ""
+        oSheet.Range("E9").Value = ""
+        oSheet.Range("H21").Value = ""
+        oSheet.Range("J21").Value = ""
+
+        '必要枚数コピペ
+        For i As Integer = 0 To dataList.Count - 2
+            Dim xlPasteRange As Excel.Range = oSheet.Range("A" & (44 + (43 * i))) 'ペースト先
+            oSheet.Rows("1:43").copy(xlPasteRange)
+            oSheet.HPageBreaks.Add(oSheet.Range("A" & (44 + (43 * i)))) '改ページ
+        Next
+
+        'データ書き込み
+        For i As Integer = 0 To dataList.Count - 1
+            Dim info As String() = dataList(i)
+            Dim post As String = info(0) '郵便番号
+            Dim jyu1 As String = info(1) '住所1
+            Dim jyu2 As String = info(2) '住所2
+            Dim nam As String = info(3) '宛名
+            Dim sText As String = info(4) '患者名
+
+            oSheet.Range("J" & (2 + 43 * i)).Value = post
+            oSheet.Range("E" & (8 + 43 * i)).Value = jyu1
+            oSheet.Range("E" & (9 + 43 * i)).Value = jyu2
+            oSheet.Range("E" & (11 + 43 * i)).Value = nam
+            oSheet.Range("J" & (15 + 43 * i)).Value = sText
+        Next
+
+        objExcel.Calculation = Excel.XlCalculation.xlCalculationAutomatic
+        objExcel.ScreenUpdating = True
+
+        '変更保存確認ダイアログ非表示
+        objExcel.DisplayAlerts = False
+
+        '印刷
+        If rbtnPrint.Checked = True Then
+            oSheet.PrintOut()
+        ElseIf rbtnPreview.Checked = True Then
+            objExcel.Visible = True
+            oSheet.PrintPreview(1)
+        End If
+
+        ' EXCEL解放
+        objExcel.Quit()
+        Marshal.ReleaseComObject(objWorkBook)
+        Marshal.ReleaseComObject(objExcel)
+        oSheet = Nothing
+        objWorkBook = Nothing
+        objExcel = Nothing
+    End Sub
+
+    ''' <summary>
+    ''' 長形4号印刷
+    ''' </summary>
+    ''' <param name="dataList"></param>
+    ''' <remarks></remarks>
+    Private Sub printNaga4(dataList As List(Of String()))
+        'エクセル
+        Dim objExcel As Excel.Application = CreateObject("Excel.Application")
+        Dim objWorkBooks As Excel.Workbooks = objExcel.Workbooks
+        Dim objWorkBook As Excel.Workbook = objWorkBooks.Open(TopForm.excelFilePath)
+        Dim oSheet As Excel.Worksheet = objWorkBook.Worksheets("長形４号改")
+        objExcel.Calculation = Excel.XlCalculation.xlCalculationManual
+        objExcel.ScreenUpdating = False
+
+        '削除
+        oSheet.Range("F2").Value = ""
+        oSheet.Range("C7").Value = ""
+        oSheet.Range("C8").Value = ""
+        oSheet.Range("C10").Value = ""
+        oSheet.Range("G19").Value = ""
+
+        '必要枚数コピペ
+        For i As Integer = 0 To dataList.Count - 2
+            Dim xlPasteRange As Excel.Range = oSheet.Range("A" & (29 + (28 * i))) 'ペースト先
+            oSheet.Rows("1:28").copy(xlPasteRange)
+            oSheet.HPageBreaks.Add(oSheet.Range("A" & (29 + (28 * i)))) '改ページ
+        Next
+
+        'データ書き込み
+        For i As Integer = 0 To dataList.Count - 1
+            Dim info As String() = dataList(i)
+            Dim post As String = info(0) '郵便番号
+            Dim jyu1 As String = info(1) '住所1
+            Dim jyu2 As String = info(2) '住所2
+            Dim nam As String = info(3) '宛名
+            Dim sText As String = info(4) '備考
+
+            oSheet.Range("F" & (2 + 28 * i)).Value = post
+            oSheet.Range("C" & (7 + 28 * i)).Value = jyu1
+            oSheet.Range("C" & (8 + 28 * i)).Value = jyu2
+            oSheet.Range("C" & (10 + 28 * i)).Value = nam
+            oSheet.Range("G" & (13 + 28 * i)).Value = sText
+        Next
+
+        objExcel.Calculation = Excel.XlCalculation.xlCalculationAutomatic
+        objExcel.ScreenUpdating = True
+
+        '変更保存確認ダイアログ非表示
+        objExcel.DisplayAlerts = False
+
+        '印刷
+        If rbtnPrint.Checked = True Then
+            oSheet.PrintOut()
+        ElseIf rbtnPreview.Checked = True Then
+            objExcel.Visible = True
+            oSheet.PrintPreview(1)
+        End If
+
+        ' EXCEL解放
+        objExcel.Quit()
+        Marshal.ReleaseComObject(objWorkBook)
+        Marshal.ReleaseComObject(objExcel)
+        oSheet = Nothing
+        objWorkBook = Nothing
+        objExcel = Nothing
     End Sub
 
     ''' <summary>
@@ -501,7 +795,7 @@ Public Class 請求先ﾏｽﾀ
         For i As Integer = 0 To rowsCount - 1
             Dim kana As String = Util.checkDBNullValue(dgvNamM("Kana", i).Value)
             If System.Text.RegularExpressions.Regex.IsMatch(kana, "^" & initialChar) Then
-                dgvNamM.Rows(i).Selected = True
+                dgvNamM.Rows(i).Cells("Nam").Selected = True
                 dgvNamM.FirstDisplayedScrollingRowIndex = i
                 displayInfo(dgvNamM.Rows(i))
                 Exit For

@@ -4,6 +4,12 @@
     Public dbFilePath As String = My.Application.Info.DirectoryPath & "\Claim2.mdb"
     Public DB_Claim2 As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & dbFilePath
 
+    'エクセルのパス
+    Public excelFilePath As String = My.Application.Info.DirectoryPath & "\Claim2.xls"
+
+    '.iniファイルのパス
+    Public iniFilePath As String = My.Application.Info.DirectoryPath & "\Claim2.ini"
+
     '画像パス
     Public topImageFilePath As String = My.Application.Info.DirectoryPath & "\Claim2.PNG"
 
@@ -23,8 +29,27 @@
             Exit Sub
         End If
 
+        If Not System.IO.File.Exists(excelFilePath) Then
+            MsgBox("エクセルファイルが存在しません。ファイルを配置して下さい。", MsgBoxStyle.Exclamation)
+            Me.Close()
+            Exit Sub
+        End If
+
+        If Not System.IO.File.Exists(iniFilePath) Then
+            MsgBox("iniファイルが存在しません。ファイルを配置して下さい。", MsgBoxStyle.Exclamation)
+            Me.Close()
+            Exit Sub
+        End If
+
         If Not System.IO.File.Exists(topImageFilePath) Then
             MsgBox("トップ画像ファイルが存在しません。ファイルを配置して下さい。", MsgBoxStyle.Exclamation)
+            Me.Close()
+            Exit Sub
+        End If
+
+        'パスワードフォーム表示
+        Dim passForm As passwordForm = New passwordForm(iniFilePath, 1)
+        If passForm.ShowDialog() <> Windows.Forms.DialogResult.OK Then
             Me.Close()
             Exit Sub
         End If

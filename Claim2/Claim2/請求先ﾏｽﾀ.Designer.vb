@@ -57,8 +57,8 @@ Partial Class 請求先ﾏｽﾀ
         Me.rbtnPrint = New System.Windows.Forms.RadioButton()
         Me.rbtnPreview = New System.Windows.Forms.RadioButton()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.rbtn3 = New System.Windows.Forms.RadioButton()
-        Me.rbtn4 = New System.Windows.Forms.RadioButton()
+        Me.rbtnNaga3 = New System.Windows.Forms.RadioButton()
+        Me.rbtnNaga4 = New System.Windows.Forms.RadioButton()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.dgvNamM = New System.Windows.Forms.DataGridView()
         Me.btnSearchA = New System.Windows.Forms.Button()
@@ -403,34 +403,35 @@ Partial Class 請求先ﾏｽﾀ
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.rbtn3)
-        Me.Panel2.Controls.Add(Me.rbtn4)
+        Me.Panel2.Controls.Add(Me.rbtnNaga3)
+        Me.Panel2.Controls.Add(Me.rbtnNaga4)
         Me.Panel2.Location = New System.Drawing.Point(627, 310)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(160, 29)
         Me.Panel2.TabIndex = 34
         '
-        'rbtn3
+        'rbtnNaga3
         '
-        Me.rbtn3.AutoSize = True
-        Me.rbtn3.Location = New System.Drawing.Point(88, 7)
-        Me.rbtn3.Name = "rbtn3"
-        Me.rbtn3.Size = New System.Drawing.Size(65, 16)
-        Me.rbtn3.TabIndex = 34
-        Me.rbtn3.TabStop = True
-        Me.rbtn3.Text = "長形3号"
-        Me.rbtn3.UseVisualStyleBackColor = True
+        Me.rbtnNaga3.AutoSize = True
+        Me.rbtnNaga3.Checked = True
+        Me.rbtnNaga3.Location = New System.Drawing.Point(88, 7)
+        Me.rbtnNaga3.Name = "rbtnNaga3"
+        Me.rbtnNaga3.Size = New System.Drawing.Size(65, 16)
+        Me.rbtnNaga3.TabIndex = 34
+        Me.rbtnNaga3.TabStop = True
+        Me.rbtnNaga3.Text = "長形3号"
+        Me.rbtnNaga3.UseVisualStyleBackColor = True
         '
-        'rbtn4
+        'rbtnNaga4
         '
-        Me.rbtn4.AutoSize = True
-        Me.rbtn4.Location = New System.Drawing.Point(15, 7)
-        Me.rbtn4.Name = "rbtn4"
-        Me.rbtn4.Size = New System.Drawing.Size(65, 16)
-        Me.rbtn4.TabIndex = 33
-        Me.rbtn4.TabStop = True
-        Me.rbtn4.Text = "長形4号"
-        Me.rbtn4.UseVisualStyleBackColor = True
+        Me.rbtnNaga4.AutoSize = True
+        Me.rbtnNaga4.Location = New System.Drawing.Point(15, 7)
+        Me.rbtnNaga4.Name = "rbtnNaga4"
+        Me.rbtnNaga4.Size = New System.Drawing.Size(65, 16)
+        Me.rbtnNaga4.TabIndex = 33
+        Me.rbtnNaga4.TabStop = True
+        Me.rbtnNaga4.Text = "長形4号"
+        Me.rbtnNaga4.UseVisualStyleBackColor = True
         '
         'Label14
         '
@@ -647,8 +648,8 @@ Partial Class 請求先ﾏｽﾀ
     Friend WithEvents rbtnPrint As System.Windows.Forms.RadioButton
     Friend WithEvents rbtnPreview As System.Windows.Forms.RadioButton
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents rbtn3 As System.Windows.Forms.RadioButton
-    Friend WithEvents rbtn4 As System.Windows.Forms.RadioButton
+    Friend WithEvents rbtnNaga3 As System.Windows.Forms.RadioButton
+    Friend WithEvents rbtnNaga4 As System.Windows.Forms.RadioButton
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents dgvNamM As System.Windows.Forms.DataGridView
     Friend WithEvents btnSearchA As System.Windows.Forms.Button
