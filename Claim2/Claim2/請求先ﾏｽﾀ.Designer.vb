@@ -57,6 +57,7 @@ Partial Class 請求先ﾏｽﾀ
         Me.rbtnPrint = New System.Windows.Forms.RadioButton()
         Me.rbtnPreview = New System.Windows.Forms.RadioButton()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.rbtnNaga40 = New System.Windows.Forms.RadioButton()
         Me.rbtnNaga3 = New System.Windows.Forms.RadioButton()
         Me.rbtnNaga4 = New System.Windows.Forms.RadioButton()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -72,6 +73,7 @@ Partial Class 請求先ﾏｽﾀ
         Me.btnSearchWA = New System.Windows.Forms.Button()
         Me.btnSearchRA = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.btnPrintOption = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.dgvNamM, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -336,7 +338,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         'btnRegist
         '
-        Me.btnRegist.Location = New System.Drawing.Point(328, 275)
+        Me.btnRegist.Location = New System.Drawing.Point(328, 257)
         Me.btnRegist.Name = "btnRegist"
         Me.btnRegist.Size = New System.Drawing.Size(71, 34)
         Me.btnRegist.TabIndex = 26
@@ -345,7 +347,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(398, 275)
+        Me.btnDelete.Location = New System.Drawing.Point(398, 257)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(71, 34)
         Me.btnDelete.TabIndex = 28
@@ -354,7 +356,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         'btnPrint
         '
-        Me.btnPrint.Location = New System.Drawing.Point(468, 275)
+        Me.btnPrint.Location = New System.Drawing.Point(468, 257)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(71, 34)
         Me.btnPrint.TabIndex = 29
@@ -363,7 +365,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         'btnHuto
         '
-        Me.btnHuto.Location = New System.Drawing.Point(641, 275)
+        Me.btnHuto.Location = New System.Drawing.Point(641, 257)
         Me.btnHuto.Name = "btnHuto"
         Me.btnHuto.Size = New System.Drawing.Size(71, 34)
         Me.btnHuto.TabIndex = 30
@@ -374,7 +376,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         Me.Panel1.Controls.Add(Me.rbtnPrint)
         Me.Panel1.Controls.Add(Me.rbtnPreview)
-        Me.Panel1.Location = New System.Drawing.Point(727, 277)
+        Me.Panel1.Location = New System.Drawing.Point(727, 259)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(151, 29)
         Me.Panel1.TabIndex = 33
@@ -403,12 +405,24 @@ Partial Class 請求先ﾏｽﾀ
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.rbtnNaga40)
         Me.Panel2.Controls.Add(Me.rbtnNaga3)
         Me.Panel2.Controls.Add(Me.rbtnNaga4)
-        Me.Panel2.Location = New System.Drawing.Point(627, 310)
+        Me.Panel2.Location = New System.Drawing.Point(627, 297)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(160, 29)
+        Me.Panel2.Size = New System.Drawing.Size(160, 48)
         Me.Panel2.TabIndex = 34
+        '
+        'rbtnNaga40
+        '
+        Me.rbtnNaga40.AutoSize = True
+        Me.rbtnNaga40.Location = New System.Drawing.Point(15, 28)
+        Me.rbtnNaga40.Name = "rbtnNaga40"
+        Me.rbtnNaga40.Size = New System.Drawing.Size(71, 16)
+        Me.rbtnNaga40.TabIndex = 48
+        Me.rbtnNaga40.TabStop = True
+        Me.rbtnNaga40.Text = "長形40号"
+        Me.rbtnNaga40.UseVisualStyleBackColor = True
         '
         'rbtnNaga3
         '
@@ -437,7 +451,7 @@ Partial Class 請求先ﾏｽﾀ
         '
         Me.Label14.AutoSize = True
         Me.Label14.ForeColor = System.Drawing.Color.Blue
-        Me.Label14.Location = New System.Drawing.Point(797, 319)
+        Me.Label14.Location = New System.Drawing.Point(797, 300)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(168, 12)
         Me.Label14.TabIndex = 35
@@ -544,18 +558,29 @@ Partial Class 請求先ﾏｽﾀ
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(42, 275)
+        Me.btnSearch.Location = New System.Drawing.Point(42, 257)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(71, 34)
         Me.btnSearch.TabIndex = 47
         Me.btnSearch.Text = "検索"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
+        'btnPrintOption
+        '
+        Me.btnPrintOption.Location = New System.Drawing.Point(832, 316)
+        Me.btnPrintOption.Name = "btnPrintOption"
+        Me.btnPrintOption.Size = New System.Drawing.Size(92, 30)
+        Me.btnPrintOption.TabIndex = 48
+        Me.btnPrintOption.Text = "封筒印刷調整"
+        Me.btnPrintOption.UseVisualStyleBackColor = True
+        Me.btnPrintOption.Visible = False
+        '
         '請求先ﾏｽﾀ
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(994, 819)
+        Me.Controls.Add(Me.btnPrintOption)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.btnSearchWA)
         Me.Controls.Add(Me.btnSearchRA)
@@ -663,4 +688,6 @@ Partial Class 請求先ﾏｽﾀ
     Friend WithEvents btnSearchWA As System.Windows.Forms.Button
     Friend WithEvents btnSearchRA As System.Windows.Forms.Button
     Friend WithEvents btnSearch As System.Windows.Forms.Button
+    Friend WithEvents rbtnNaga40 As System.Windows.Forms.RadioButton
+    Friend WithEvents btnPrintOption As System.Windows.Forms.Button
 End Class

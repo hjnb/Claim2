@@ -226,6 +226,19 @@ Claim2
  </summary>
 	<param name="dataList"></param>
 	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.printNaga40(System.Collections.Generic.List{System.String[]})">
+	<summary>
+ 長形40号印刷
+ </summary>
+	<param name="dataList"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.convZipCode(System.String)">
+	<summary>
+ 郵便番号文字列調整
+ </summary>
+	<param name="post"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:Claim2.請求先ﾏｽﾀ.initialSearch(System.String)">
 	<summary>
  対象の頭文字までスクロール
@@ -242,6 +255,25 @@ Claim2
 </member><member name="M:Claim2.請求先ﾏｽﾀ.btnSearch_Click(System.Object,System.EventArgs)">
 	<summary>
  検索ボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.請求先ﾏｽﾀ.btnPrintOption_Click(System.Object,System.EventArgs)">
+	<summary>
+ 封筒印刷調整ボタンクリックイベント
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Claim2.封筒印刷調整.#ctor">
+	<summary>
+ コンストラクタ
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Claim2.封筒印刷調整.封筒印刷調整_Load(System.Object,System.EventArgs)">
+	<summary>
+ loadイベント
  </summary>
 	<param name="sender"></param>
 	<param name="e"></param>

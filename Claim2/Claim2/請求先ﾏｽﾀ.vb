@@ -5,6 +5,7 @@ Imports System.Runtime.InteropServices
 Public Class 請求先ﾏｽﾀ
 
     Private searchForm As 検索
+    Private hutoForm As 封筒印刷調整
 
     ''' <summary>
     ''' 行ヘッダーのカレントセルを表す三角マークを非表示に設定する為のクラス。
@@ -363,6 +364,14 @@ Public Class 請求先ﾏｽﾀ
                 e.Graphics.DrawRectangle(New Pen(Color.Black, 2I), e.CellBounds.X + 1I, e.CellBounds.Y + 1I, e.CellBounds.Width - 3I, e.CellBounds.Height - 3I)
             End If
 
+            '縦線
+            If e.ColumnIndex = 2 Then
+                With e.CellBounds
+                    .Offset(-1, 0)
+                    e.Graphics.DrawLine(New Pen(Color.FromKnownColor(KnownColor.Blue)), .Right, .Top, .Right, .Bottom)
+                End With
+            End If
+
             Dim pParts As DataGridViewPaintParts = e.PaintParts And Not DataGridViewPaintParts.Background
             e.Paint(e.ClipBounds, pParts)
             e.Handled = True
@@ -432,6 +441,7 @@ Public Class 請求先ﾏｽﾀ
         rs.Fields("Post").Value = post
         rs.Fields("Jyu1").Value = jyu1
         rs.Fields("Jyu2").Value = jyu2
+        rs.Fields("Tai").Value = tai
         rs.Fields("SPost").Value = sPost
         rs.Fields("SJyu1").Value = sJyu1
         rs.Fields("SJyu2").Value = sJyu2
@@ -647,6 +657,9 @@ Public Class 請求先ﾏｽﾀ
         ElseIf rbtnNaga4.Checked Then
             '長形4号印刷
             printNaga4(dataList)
+        ElseIf rbtnNaga40.Checked Then
+            '長形40号印刷
+            printNaga40(dataList)
         End If
     End Sub
 
@@ -687,7 +700,7 @@ Public Class 請求先ﾏｽﾀ
             Dim nam As String = info(3) '宛名
             Dim sText As String = info(4) '患者名
 
-            oSheet.Range("J" & (2 + 43 * i)).Value = post
+            oSheet.Range("J" & (2 + 43 * i)).Value = convZipCode(post)
             oSheet.Range("E" & (8 + 43 * i)).Value = jyu1
             oSheet.Range("E" & (9 + 43 * i)).Value = jyu2
             oSheet.Range("E" & (11 + 43 * i)).Value = nam
@@ -736,7 +749,7 @@ Public Class 請求先ﾏｽﾀ
         oSheet.Range("C7").Value = ""
         oSheet.Range("C8").Value = ""
         oSheet.Range("C10").Value = ""
-        oSheet.Range("G19").Value = ""
+        oSheet.Range("G13").Value = ""
 
         '必要枚数コピペ
         For i As Integer = 0 To dataList.Count - 2
@@ -754,7 +767,7 @@ Public Class 請求先ﾏｽﾀ
             Dim nam As String = info(3) '宛名
             Dim sText As String = info(4) '備考
 
-            oSheet.Range("F" & (2 + 28 * i)).Value = post
+            oSheet.Range("F" & (2 + 28 * i)).Value = convZipCode(post)
             oSheet.Range("C" & (7 + 28 * i)).Value = jyu1
             oSheet.Range("C" & (8 + 28 * i)).Value = jyu2
             oSheet.Range("C" & (10 + 28 * i)).Value = nam
@@ -783,6 +796,103 @@ Public Class 請求先ﾏｽﾀ
         objWorkBook = Nothing
         objExcel = Nothing
     End Sub
+
+    ''' <summary>
+    ''' 長形40号印刷
+    ''' </summary>
+    ''' <param name="dataList"></param>
+    ''' <remarks></remarks>
+    Private Sub printNaga40(dataList As List(Of String()))
+        'エクセル
+        Dim objExcel As Excel.Application = CreateObject("Excel.Application")
+        Dim objWorkBooks As Excel.Workbooks = objExcel.Workbooks
+        Dim objWorkBook As Excel.Workbook = objWorkBooks.Open(TopForm.excelFilePath)
+        Dim oSheet As Excel.Worksheet = objWorkBook.Worksheets("長形４０号")
+        objExcel.Calculation = Excel.XlCalculation.xlCalculationManual
+        objExcel.ScreenUpdating = False
+
+        '削除
+        oSheet.Range("F2").Value = ""
+        oSheet.Range("C7").Value = ""
+        oSheet.Range("C8").Value = ""
+        oSheet.Range("C10").Value = ""
+        oSheet.Range("G13").Value = ""
+
+        '必要枚数コピペ
+        For i As Integer = 0 To dataList.Count - 2
+            Dim xlPasteRange As Excel.Range = oSheet.Range("A" & (29 + (28 * i))) 'ペースト先
+            oSheet.Rows("1:28").copy(xlPasteRange)
+            oSheet.HPageBreaks.Add(oSheet.Range("A" & (29 + (28 * i)))) '改ページ
+        Next
+
+        'データ書き込み
+        For i As Integer = 0 To dataList.Count - 1
+            Dim info As String() = dataList(i)
+            Dim post As String = info(0) '郵便番号
+            Dim jyu1 As String = info(1) '住所1
+            Dim jyu2 As String = info(2) '住所2
+            Dim nam As String = info(3) '宛名
+            Dim sText As String = info(4) '備考
+
+            oSheet.Range("F" & (2 + 28 * i)).Value = convZipCode(post)
+            oSheet.Range("C" & (7 + 28 * i)).Value = jyu1
+            oSheet.Range("C" & (8 + 28 * i)).Value = jyu2
+            oSheet.Range("C" & (10 + 28 * i)).Value = nam
+            oSheet.Range("G" & (13 + 28 * i)).Value = sText
+        Next
+
+        objExcel.Calculation = Excel.XlCalculation.xlCalculationAutomatic
+        objExcel.ScreenUpdating = True
+
+        '変更保存確認ダイアログ非表示
+        objExcel.DisplayAlerts = False
+
+        '印刷
+        If rbtnPrint.Checked = True Then
+            oSheet.PrintOut()
+        ElseIf rbtnPreview.Checked = True Then
+            objExcel.Visible = True
+            oSheet.PrintPreview(1)
+        End If
+
+        ' EXCEL解放
+        objExcel.Quit()
+        Marshal.ReleaseComObject(objWorkBook)
+        Marshal.ReleaseComObject(objExcel)
+        oSheet = Nothing
+        objWorkBook = Nothing
+        objExcel = Nothing
+    End Sub
+
+    ''' <summary>
+    ''' 郵便番号文字列調整
+    ''' </summary>
+    ''' <param name="post"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function convZipCode(post As String) As String
+        '全角を半角に変換
+        Dim halfPost As String = StrConv(post, VbStrConv.Narrow)
+
+        '郵便番号の形式ではない場合は空文字を返す
+        If Not System.Text.RegularExpressions.Regex.IsMatch(halfPost, "^\d\d\d-\d\d\d\d$") Then
+            Return ""
+        End If
+
+        'スペースで調整
+        Dim formattedZipCode As String = " "
+        For i As Integer = 0 To 7
+            If i = 7 Then
+                formattedZipCode &= halfPost.Substring(i, 1)
+            ElseIf i = 3 Then
+                formattedZipCode &= "  "
+            Else
+                formattedZipCode &= halfPost.Substring(i, 1) & " "
+            End If
+        Next
+
+        Return formattedZipCode
+    End Function
 
     ''' <summary>
     ''' 対象の頭文字までスクロール
@@ -825,5 +935,18 @@ Public Class 請求先ﾏｽﾀ
         searchForm.Owner = Me
         searchForm.ShowDialog()
         searchForm.Dispose()
+    End Sub
+
+    ''' <summary>
+    ''' 封筒印刷調整ボタンクリックイベント
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btnPrintOption_Click(sender As System.Object, e As System.EventArgs) Handles btnPrintOption.Click
+        If IsNothing(hutoForm) OrElse hutoForm.IsDisposed Then
+            hutoForm = New 封筒印刷調整()
+            hutoForm.Show()
+        End If
     End Sub
 End Class

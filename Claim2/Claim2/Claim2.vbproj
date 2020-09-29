@@ -101,6 +101,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Util.vb" />
+    <Compile Include="封筒印刷調整.Designer.vb">
+      <DependentUpon>封筒印刷調整.vb</DependentUpon>
+    </Compile>
+    <Compile Include="封筒印刷調整.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="検索.Designer.vb">
       <DependentUpon>検索.vb</DependentUpon>
     </Compile>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TopForm.resx">
       <DependentUpon>TopForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="封筒印刷調整.resx">
+      <DependentUpon>封筒印刷調整.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="検索.resx">
       <DependentUpon>検索.vb</DependentUpon>
